@@ -1,4 +1,5 @@
 import 'package:basic_messaging_app/models/chatUsersModel.dart';
+import 'package:basic_messaging_app/widgets/conversationList.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatefulWidget {
@@ -8,7 +9,7 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   List<ChatUsers> chatUsers = [
-    ChatUsers(name: "Jane Russel", messageText: "Awesome Setup", imageURL: "images/userImage1.jpg", time: "Now"),
+    ChatUsers(name: "Jane Russel", messageText: "Awesome Setup", imageURL: "lib/images/userImage1.jpg", time: "Now"),
     ChatUsers(name: "Glady's Murphy", messageText: "That's Great", imageURL: "images/userImage2.jpg", time: "Yesterday"),
     ChatUsers(name: "Jorge Henry", messageText: "Where are you?", imageURL: "images/userImage3.jpg", time: "2 Days Ago"),
     ChatUsers(name: "Philip Fox", messageText: "I'm Busy", imageURL: "images/userImage4.jpg", time: "Last Week"),
@@ -65,7 +66,7 @@ class _ChatPageState extends State<ChatPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 16, left: 16, right: 16),
+              padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
               child: TextField(
                 decoration: InputDecoration(
                   hintText: "Search...",
@@ -73,7 +74,7 @@ class _ChatPageState extends State<ChatPage> {
                   prefixIcon: Icon(Icons.search, color: Colors.grey.shade600, size: 20,),
                   filled: true,
                   fillColor: Colors.grey.shade100,
-                  contentPadding: EdgeInsets.all(8),
+                  contentPadding: const EdgeInsets.all(8),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                     borderSide: BorderSide(
@@ -83,6 +84,21 @@ class _ChatPageState extends State<ChatPage> {
                 ),
               ),
             ),
+            ListView.builder(
+              itemCount: chatUsers.length,
+              shrinkWrap: true,
+              padding: const EdgeInsets.only(top: 16),
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                return ConversationList(
+                    name: chatUsers[index].name,
+                    messageText: chatUsers[index].messageText,
+                    imageURL: chatUsers[index].imageURL,
+                    time: chatUsers[index].time,
+                    isMessageRead: (index == 0 || index == 3) ? true : false,
+                );
+              },
+            )
           ],
         ),
       ),
