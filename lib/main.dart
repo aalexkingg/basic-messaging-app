@@ -1,4 +1,4 @@
-import 'package:basic_messaging_app/screens/homPage.dart';
+import 'package:basic_messaging_app/screens/homePage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
