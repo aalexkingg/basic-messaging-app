@@ -1,12 +1,29 @@
 import 'package:basic_messaging_app/models/chatMessageModel.dart';
+import 'package:basic_messaging_app/widgets/conversationList.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ChatDetailPage extends StatefulWidget {
+
+  final String userName;
+
+  ChatDetailPage({required this.userName});
+
   @override
   _ChatDetailPageState createState() => _ChatDetailPageState();
+
 }
 
 class _ChatDetailPageState extends State<ChatDetailPage> {
+
+  String name = "";
+
+  @override
+  void initState() {
+    super.initState();
+    name = widget.userName;
+  }
+
   List<ChatMessage> messages = [
     ChatMessage(messageContent: "Hello", messageType: "receiver"),
     ChatMessage(messageContent: "How are you?", messageType: "receiver"),
@@ -14,7 +31,8 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     ChatMessage(messageContent: "I'm good, what about you?", messageType: "sender"),
     ChatMessage(messageContent: "Not too bad", messageType: "receiver"),
   ];
-  
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,10 +61,10 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
+                    children: <Widget>[
                       Text(
-                        "Temp name",
-                        style: TextStyle(
+                        name,
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600
                         ),
