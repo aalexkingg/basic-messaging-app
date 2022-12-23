@@ -9,14 +9,14 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   List<ChatUsers> chatUsers = [
-    ChatUsers(name: "Jane Russel", messageText: "Awesome Setup", imageURL: "lib/images/userImage1.jpg", time: "Now"),
-    ChatUsers(name: "Glady's Murphy", messageText: "That's Great", imageURL: "images/userImage2.jpg", time: "Yesterday"),
-    ChatUsers(name: "Jorge Henry", messageText: "Where are you?", imageURL: "images/userImage3.jpg", time: "2 Days Ago"),
-    ChatUsers(name: "Philip Fox", messageText: "I'm Busy", imageURL: "images/userImage4.jpg", time: "Last Week"),
-    ChatUsers(name: "Debra Hawkins", messageText: "Thank you", imageURL: "images/userImage5.jpg", time: "2 Weeks Ago"),
-    ChatUsers(name: "Jacob Pena", messageText: "Will update you", imageURL: "images/userImage6.jpg", time: "2 Weeks Ago"),
-    ChatUsers(name: "Andrey Jones", messageText: "Hello", imageURL: "images/userImage7.jpg", time: "Last Month"),
-    ChatUsers(name: "John Wick", messageText: "How are you?", imageURL: "images/userImage8.jpg", time: "Last Year"),
+    ChatUsers(name: "Jane Russel", messageText: "Awesome Setup", imageURL: "lib/images/userImage1.jpg", time: "Now", isMessageRead: false),
+    ChatUsers(name: "Glady's Murphy", messageText: "That's Great", imageURL: "images/userImage2.jpg", time: "Yesterday", isMessageRead: false),
+    ChatUsers(name: "Jorge Henry", messageText: "Where are you?", imageURL: "images/userImage3.jpg", time: "2 Days Ago", isMessageRead: true),
+    ChatUsers(name: "Philip Fox", messageText: "I'm Busy", imageURL: "images/userImage4.jpg", time: "Last Week", isMessageRead: true),
+    ChatUsers(name: "Debra Hawkins", messageText: "Thank you", imageURL: "images/userImage5.jpg", time: "2 Weeks Ago", isMessageRead: true),
+    ChatUsers(name: "Jacob Pena", messageText: "Will update you", imageURL: "images/userImage6.jpg", time: "2 Weeks Ago", isMessageRead: true),
+    ChatUsers(name: "Andrey Jones", messageText: "Hello", imageURL: "images/userImage7.jpg", time: "Last Month", isMessageRead: true),
+    ChatUsers(name: "John Wick", messageText: "How are you?", imageURL: "images/userImage8.jpg", time: "Last Year", isMessageRead: true),
   ];
   
   @override
@@ -95,7 +95,7 @@ class _ChatPageState extends State<ChatPage> {
                     messageText: chatUsers[index].messageText,
                     imageURL: chatUsers[index].imageURL,
                     time: chatUsers[index].time,
-                    isMessageRead: (index == 0 || index == 3) ? true : false,
+                    isMessageRead: chatUsers[index].isMessageRead,
                 );
               },
             )

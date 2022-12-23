@@ -6,7 +6,7 @@ class ConversationList extends StatefulWidget {
   String messageText;
   String imageURL;
   String time;
-  bool isMessageRead;
+  bool isMessageRead = false;
 
   ConversationList({
     required this.name,
@@ -26,6 +26,7 @@ class _ConversationListState extends State<ConversationList> {
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
+          widget.isMessageRead = true;
           return ChatDetailPage(userName: widget.name);
         }));
       },
@@ -49,13 +50,13 @@ class _ConversationListState extends State<ConversationList> {
                         children: <Widget>[
                           Text(widget.name, style: TextStyle(
                             fontSize: 16,
-                            fontWeight: widget.isMessageRead ? FontWeight.bold : FontWeight.normal
+                            fontWeight: widget.isMessageRead ? FontWeight.normal : FontWeight.bold
                           ),),
                           const SizedBox(height: 6,),
                           Text(widget.messageText, style: TextStyle(
                             fontSize: 13,
                             color: Colors.grey.shade600,
-                            fontWeight: widget.isMessageRead ? FontWeight.bold : FontWeight.normal
+                            fontWeight: widget.isMessageRead ? FontWeight.normal : FontWeight.bold
                           ),),
                         ],
                       ),
@@ -68,7 +69,7 @@ class _ConversationListState extends State<ConversationList> {
               widget.time,
               style: TextStyle(
                 fontSize: 12,
-                fontWeight: widget.isMessageRead ? FontWeight.bold : FontWeight.normal,
+                fontWeight: widget.isMessageRead ? FontWeight.normal : FontWeight.bold,
               ),
             ),
           ],
