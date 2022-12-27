@@ -16,10 +16,11 @@ class HomePage extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.message),
             label: "Chats",
+
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.group_work),
-            label: "Channels",
+            icon: Icon(Icons.settings),
+            label: "Settings",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_box),
