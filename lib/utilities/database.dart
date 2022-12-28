@@ -20,7 +20,22 @@ class TestDatabase {
     await deleteDatabase(path);
   }
 
-  void insert() async {
+  void insert(Database database) async {
+    await database.transaction((txn) async {
+      int id1 = await txn.rawInsert(
+        'INSERT INTO Test(name, value, num) VALUES("some name", 1234, 456.789)'
+      );
+      print('Inserted: $id1');
+
+      int id2 = await txn.rawInsert(
+        'INSERT INTO Test(name, value, num) VALUES(?, ?, ?)',
+          ['another name', 12345678, 3.1416]
+      );
+      print('Inserted: $id2');
+    });
+  }
+
+  void update() async {
 
   }
 
