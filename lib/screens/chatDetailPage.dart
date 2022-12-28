@@ -133,11 +133,11 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
           ListView.builder(
             itemCount: messages.length,
             shrinkWrap: true,
-            padding: const EdgeInsets.only(top: 10, bottom: 10),
+            padding: const EdgeInsets.only(top: 1, bottom:1),
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) {
               return Container(
-                padding: const EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
+                padding: const EdgeInsets.only(left: 10, right: 10, top: 1, bottom: 1),
                 child: Align(
                   alignment: (messages[index].messageType == "receiver" ? Alignment.topLeft : Alignment.topRight),
                   child: Container(

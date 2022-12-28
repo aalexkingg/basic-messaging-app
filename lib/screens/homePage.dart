@@ -2,6 +2,9 @@ import 'package:basic_messaging_app/screens/chatPage.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
+
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +19,6 @@ class HomePage extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.message),
             label: "Chats",
-
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),

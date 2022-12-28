@@ -1,7 +1,9 @@
 import 'package:basic_messaging_app/screens/homePage.dart';
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
 
 void main() {
+  // Init app
   runApp(MyApp());
 }
 
