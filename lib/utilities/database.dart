@@ -1,17 +1,21 @@
+import 'dart:ffi';
+
 import 'package:sqflite/sqflite.dart';
 
-class TestDatabase {
+class Messages {
 
   Future<String> getPath() async {
     var databasePath = await getDatabasesPath();
-    return join(databasePath, 'app.db');
-}
+    return "$databasePath/app.db";
+  }
 
   Future<Database> init(String path) async {
     Database database = await openDatabase(path, version: 1,
+        // onCreate is called if the database does not exist
         onCreate: (Database db, int version) async {
           await db.execute(
-              'CREATE TABLE Test (id INTEGER PRIMARY KEY, name TEXT, value INTEGER, num REAL)');
+              'CREATE TABLE Messages (messageID INTEGER PRIMARY KEY, INDEX convoID INTEGER, content TEXT, time DATETIME, type TEXT)'
+          );
         });
     return database;
   }
@@ -20,23 +24,36 @@ class TestDatabase {
     await deleteDatabase(path);
   }
 
-  void insert(Database database) async {
+  void addMessage(Database database, List values) async {
     await database.transaction((txn) async {
-      int id1 = await txn.rawInsert(
-        'INSERT INTO Test(name, value, num) VALUES("some name", 1234, 456.789)'
+      int id = await txn.rawInsert(
+        'INSERT INTO Messages(messageID, convoID, content, time, type) VALUES(?, ?, ?, ?, ?)',
+        values
       );
-      print('Inserted: $id1');
-
-      int id2 = await txn.rawInsert(
-        'INSERT INTO Test(name, value, num) VALUES(?, ?, ?)',
-          ['another name', 12345678, 3.1416]
-      );
-      print('Inserted: $id2');
     });
   }
 
-  void update() async {
+  void updateMessage(Database database, String newContent, Int messageID) async {
+    int count = await database.rawUpdate(
+        'UPDATE Messages SET content = ? WHERE messageID = ?',
+        [newContent, messageID]
+    );
+  }
 
+  Future<List<Map>> getMessages(Database database, String parameter, Int value) async {
+    List<Map> messages = await database.rawQuery(
+        'SELECT * FROM Messages WHERE ? = ?',
+      [parameter, value]
+    );
+    return messages;
+  }
+
+  Future<int> deleteMessages(Database database, String parameter, Int value) async {
+    int count = await database.rawDelete(
+      'DELETE FROM Messages WHERE ? = ?',
+      [parameter, value]
+    );
+    return count;
   }
 
 }
